@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "awesome",
-    "slug": "awesome",
+    "name": "rn-sample",
+    "slug": "rn-sample",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
