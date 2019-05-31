@@ -1,13 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Text, View, ScrollView, FlatList, StyleSheet } from 'react-native'
 import ListItem from '../../components/ListItem'
 
-export default class ListScreen extends React.Component {
+class ListScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.list}>
         <FlatList
-          data={[{key: 'a'}, {key: 'b'}]}
+          data={this.props.events}
           renderItem={({item}) => (
             <ListItem label={item.key}/>
           )}
@@ -17,8 +18,14 @@ export default class ListScreen extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return state
+}
+
 const styles = StyleSheet.create({
   list: {
     backgroundColor: 'white'
   }
 })
+
+export default connect(mapStateToProps)(ListScreen)
