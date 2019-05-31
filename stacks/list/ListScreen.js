@@ -4,7 +4,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import SideMenu from 'react-native-side-menu';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 class ListItem extends React.Component {
   constructor(props) {
@@ -32,40 +32,43 @@ class Menu extends React.Component {
 
 class ListScreen extends React.Component {
   render() {
-    const menu = <Menu/>;
     return (
-      <SideMenu menu={menu}>
-        <ScrollView style={styles.list}>
-          <FlatList
-            data={[{key: 'a'}, {key: 'b'}]}
-            renderItem={({item}) => (
-              <ListItem label={item.key}/>
-            )}
-          />
-        </ScrollView>
-      </SideMenu>
+      <ScrollView style={styles.list}>
+        <FlatList
+          data={[{key: 'a'}, {key: 'b'}]}
+          renderItem={({item}) => (
+            <ListItem label={item.key}/>
+          )}
+        />
+      </ScrollView>
     );
   }
 }
 
-const ListScreenStack = createStackNavigator({
+const ListScreenNavigator = createStackNavigator({
   List: ListScreen,
 }, {
-  headerMode: 'none'
-})
+  defaultNavigationOptions: () => ({
+    headerTitle: 'List',
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: 'tomato',
+    }
+  }),
+});
 
-export default ListScreenStack
+const ListScreenContainer = createAppContainer(ListScreenNavigator);
 
-// export default class List extends React.Component {
-//   render() {
-//     const menu = <Menu/>;
-//     return (
-//       <SideMenu menu={menu}>
-//         <ListScreenStack/>
-//       </SideMenu>
-//     );
-//   }
-// }
+export default class List extends React.Component {
+  render() {
+    const menu = <Menu/>;
+    return (
+      <SideMenu menu={menu}>
+        <ListScreenContainer/>
+      </SideMenu>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   list: {
