@@ -9,9 +9,8 @@ class ListScreen extends React.Component {
       <ScrollView style={styles.list}>
         <FlatList
           data={this.props.events}
-          renderItem={({item}) => (
-            <ListItem label={item.key}/>
-          )}
+          renderItem={({item}) => <ListItem label={item}/> }
+          keyExtractor={(_, index) => index.toString()}
         />
       </ScrollView>
     )
