@@ -3,7 +3,6 @@ import {
   Button, Text, View, ScrollView, FlatList,
   StyleSheet,
 } from 'react-native';
-import SideMenu from 'react-native-side-menu';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import ListItem from './ListItem';
 import Menu from '../../components/Menu';
