@@ -10,5 +10,6 @@ export default createStackNavigator({
     headerStyle: {
       backgroundColor: 'tomato',
     }
-  })
+  }),
+  headerMode: 'none',
 })
