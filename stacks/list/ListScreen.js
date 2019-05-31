@@ -34,14 +34,16 @@ class ListScreen extends React.Component {
   render() {
     const menu = <Menu/>;
     return (
-      <ScrollView style={styles.list}>
-        <FlatList
-          data={[{key: 'a'}, {key: 'b'}]}
-          renderItem={({item}) => (
-            <ListItem label={item.key}/>
-          )}
-        />
-      </ScrollView>
+      <SideMenu menu={menu}>
+        <ScrollView style={styles.list}>
+          <FlatList
+            data={[{key: 'a'}, {key: 'b'}]}
+            renderItem={({item}) => (
+              <ListItem label={item.key}/>
+            )}
+          />
+        </ScrollView>
+      </SideMenu>
     );
   }
 }
@@ -49,25 +51,21 @@ class ListScreen extends React.Component {
 const ListScreenStack = createStackNavigator({
   List: ListScreen,
 }, {
-  defaultNavigationOptions: () => ({
-    headerTitle: 'List',
-    headerTintColor: 'white',
-    headerStyle: {
-      backgroundColor: 'tomato',
-    }
-  }),
+  headerMode: 'none'
 })
 
-export default class List extends React.Component {
-  render() {
-    const menu = <Menu/>;
-    return (
-      <SideMenu menu={menu}>
-        <ListScreenStack/>
-      </SideMenu>
-    );
-  }
-}
+export default ListScreenStack
+
+// export default class List extends React.Component {
+//   render() {
+//     const menu = <Menu/>;
+//     return (
+//       <SideMenu menu={menu}>
+//         <ListScreenStack/>
+//       </SideMenu>
+//     );
+//   }
+// }
 
 const styles = StyleSheet.create({
   list: {
