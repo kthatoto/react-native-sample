@@ -1,7 +1,8 @@
-import React from 'react';
-import { Button, Text, View } from 'react-native';
+import React from 'react'
+import { connect } from 'react-redux'
+import { Button, Text, View } from 'react-native'
 
-export default class SettingsScreen extends React.Component {
+class SettingsScreen extends React.Component {
   render () {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -10,3 +11,9 @@ export default class SettingsScreen extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return state
+}
+
+export default connect(mapStateToProps)(SettingsScreen)
