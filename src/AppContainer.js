@@ -1,10 +1,11 @@
+import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import SideMenu from 'react-native-side-menu';
-import Menu from '../components/Menu'
+import Menu from './components/Menu'
 
-import ListStack from '../stacks/ListStack'
-import SettingsStack from '../stacks/SettingsStack'
+import ListStack from './views/list/ListStack'
+import SettingsStack from './views/settings/SettingsStack'
 
 const AppContainer = createAppContainer(createBottomTabNavigator(
   {
