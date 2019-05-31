@@ -5,30 +5,8 @@ import {
 } from 'react-native';
 import SideMenu from 'react-native-side-menu';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-
-class ListItem extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    return (
-      <View style={styles.listItem}>
-        <Text>{this.props.label}</Text>
-      </View>
-    );
-  }
-}
-
-class Menu extends React.Component {
-  render() {
-    return (
-      <View style={styles.menu}>
-        <Text>Menu</Text>
-      </View>
-    );
-  }
-}
+import ListItem from './ListItem';
+import Menu from '../../components/Menu';
 
 class ListScreen extends React.Component {
   render() {
@@ -73,15 +51,5 @@ export default class List extends React.Component {
 const styles = StyleSheet.create({
   list: {
     backgroundColor: 'white',
-  },
-  listItem: {
-    marginHorizontal: 20,
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
-  },
-  menu: {
-    flex: 1,
-    backgroundColor: '#eee',
   },
 });
