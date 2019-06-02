@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default class ListItem extends React.Component {
   constructor(props) {
@@ -8,9 +8,9 @@ export default class ListItem extends React.Component {
 
   render() {
     return (
-      <View style={styles.listItem}>
+      <TouchableOpacity style={styles.listItem}>
         <Text>{this.props.label}</Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
