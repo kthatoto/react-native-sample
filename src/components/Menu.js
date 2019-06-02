@@ -14,6 +14,7 @@ export default class Menu extends React.Component {
 const styles = StyleSheet.create({
   menu: {
     flex: 1,
+    padding: 30,
     backgroundColor: '#eee',
   },
 });
