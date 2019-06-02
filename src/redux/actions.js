@@ -1,8 +1,7 @@
-export const addEvent = event => {
+export const openMenu = () => {
   return dispatch => {
     dispatch({
-      type: 'ADD_EVENT',
-      event
+      type: 'OPEN_MENU'
     })
   }
 }

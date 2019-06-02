@@ -1,6 +1,7 @@
 import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import { connect } from 'react-redux'
 import SideMenu from 'react-native-side-menu';
 import Menu from './components/Menu'
 
@@ -30,13 +31,18 @@ const AppContainer = createAppContainer(createBottomTabNavigator(
   }
 ))
 
-export default class App extends React.Component {
+const mapStateToProps = state => state
+
+class App extends React.Component {
   render() {
+    const opening = this.props.opening
     const menu = <Menu/>
     return (
-      <SideMenu menu={menu}>
+      <SideMenu menu={menu} isOpen={opening}>
         <AppContainer/>
       </SideMenu>
     )
   }
 }
+
+export default connect(mapStateToProps)(App)

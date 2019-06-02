@@ -1,10 +1,10 @@
 import initialState from './initialState'
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_EVENT':
+    case 'OPEN_MENU':
       return {
         ...state,
-        events: state.events.concat(action.event)
+        opening: true
       }
     default:
       return state
