@@ -1,16 +1,15 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation'
-import ListScreen from './ListScreen'
+import HomeScreen from './HomeScreen'
 
 export default createStackNavigator({
-  List: { screen: ListScreen }
+  Home: { screen: HomeScreen }
 }, {
   defaultNavigationOptions: () => ({
-    headerTitle: 'List',
+    headerTitle: 'Home',
     headerTintColor: 'white',
     headerStyle: {
       backgroundColor: 'tomato'
     }
   })
 })
-

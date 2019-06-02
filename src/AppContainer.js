@@ -5,12 +5,12 @@ import { connect } from 'react-redux'
 import SideMenu from 'react-native-side-menu';
 import Menu from './components/Menu'
 
-import ListStack from './views/list/ListStack'
+import HomeStack from './views/home/HomeStack'
 import SettingsStack from './views/settings/SettingsStack'
 
 const AppContainer = createAppContainer(createBottomTabNavigator(
   {
-    List: { screen: ListStack },
+    Home: { screen: HomeStack },
     Settings: { screen: SettingsStack },
   },
   {
@@ -18,7 +18,7 @@ const AppContainer = createAppContainer(createBottomTabNavigator(
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state
         const iconName = {
-          List: 'ios-list',
+          Home: 'ios-home',
           Settings: 'ios-options'
         }[routeName]
         return <Ionicons name={iconName} size={25} color={tintColor} />
