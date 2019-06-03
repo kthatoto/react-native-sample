@@ -34,6 +34,9 @@ const AppContainer = createAppContainer(createBottomTabNavigator(
 const mapStateToProps = state => state
 
 class App extends React.Component {
+  componentWillMount () {
+  }
+
   render() {
     const opening = this.props.opening
     const menu = <Menu/>
