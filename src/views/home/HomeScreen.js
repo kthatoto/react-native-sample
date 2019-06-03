@@ -5,8 +5,6 @@ import { Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity } from '
 import ListItem from '../../components/ListItem'
 import PostModal from '../../components/PostModal'
 
-import DeviceInfo from 'react-native-device-info'
-
 class HomeScreen extends React.Component {
   state = {
     modalVisible: false,
@@ -24,8 +22,6 @@ class HomeScreen extends React.Component {
     this.props.navigation.setParams({
       openModal: this.openModal.bind(this)
     })
-
-    console.log(DeviceInfo.getUniqueID())
   }
 
   render() {
