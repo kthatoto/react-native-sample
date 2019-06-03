@@ -34,15 +34,11 @@ class SettingsScreen extends React.Component {
   render () {
     return (
       <View style={styles.wrapper}>
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={this.state.modalVisible}>
-          <TouchableOpacity style={styles.modalOuter} onPress={() => {this.setModalVisible(false)}}>
-            <View style={styles.modalInner}>
-              <Text>Hello World!!!!</Text>
-            </View>
-          </TouchableOpacity>
+        <Modal isVisible={this.state.modalVisible}>
+          <View style={styles.modal}>
+            <Text>hey</Text>
+            <Button onPress={() => this.setModalVisible(false)} title="Close Modal"/>
+          </View>
         </Modal>
 
         <Button
@@ -72,16 +68,9 @@ const styles = StyleSheet.create({
   wrapper: {
     marginTop: 30
   },
-  modalOuter: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)'
-  },
-  modalInner: {
+  modal: {
     backgroundColor: 'white',
-    width: screenWidth * 0.8,
-    height: screenHeight * 0.7,
+    borderRadius: 5,
     padding: 20
   }
 })
