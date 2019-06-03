@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 import axios from 'axios'
 
-import ListItem from '../../components/ListItem'
+import PostItem from '../../components/PostItem'
 import PostModal from '../../components/PostModal'
 import ApiClient from '../../utils/ApiClient'
 
@@ -38,7 +38,7 @@ class HomeScreen extends React.Component {
         <ScrollView style={styles.home}>
           <FlatList
             data={this.state.posts}
-            renderItem={({item}) => <ListItem label={item.body}/>}
+            renderItem={({item}) => <PostItem label={item.body}/>}
             keyExtractor={(item) => item.id.toString()}
           />
         </ScrollView>

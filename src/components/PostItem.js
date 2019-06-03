@@ -1,14 +1,14 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default class ListItem extends React.Component {
+export default class PostItem extends React.Component {
   constructor(props) {
     super(props)
   }
 
   render() {
     return (
-      <TouchableOpacity style={styles.listItem}>
+      <TouchableOpacity style={styles.postItem}>
         <Text>{this.props.label}</Text>
       </TouchableOpacity>
     );
@@ -16,7 +16,7 @@ export default class ListItem extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  listItem: {
+  postItem: {
     marginHorizontal: 20,
     padding: 20,
     borderBottomWidth: 1,
