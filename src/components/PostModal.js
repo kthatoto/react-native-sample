@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Text, View, Button, Dimensions, StyleSheet } from 'react-native'
+import { Text, View, Button, Dimensions, StyleSheet, TextInput } from 'react-native'
 import Modal from 'react-native-modal'
+import { Formik, Form } from 'formik'
 
 class PostModal extends React.Component {
   render () {
@@ -9,8 +10,13 @@ class PostModal extends React.Component {
       <Modal isVisible={this.props.modalVisible}
         onBackdropPress={() => this.props.closeModal()}>
         <View style={styles.modal}>
-          <Text>hey</Text>
-          <Button onPress={() => this.props.closeModal()} title="Close Modal"/>
+          <Formik initialValues={{ body: '' }}
+            render={props => (
+              <Form>
+                <TextInput name="body" value={props.values.body}/>
+              </Form>
+            )}
+          />
         </View>
       </Modal>
     )

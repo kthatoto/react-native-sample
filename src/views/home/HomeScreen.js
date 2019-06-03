@@ -1,8 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
-import { Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import {
+  Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity, TextInput
+} from 'react-native'
 import axios from 'axios'
+import { Formik } from 'formik'
 
 import PostItem from '../../components/PostItem'
 import PostModal from '../../components/PostModal'
