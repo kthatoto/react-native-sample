@@ -2,13 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
 import { Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import axios from 'axios'
+
 import ListItem from '../../components/ListItem'
 import PostModal from '../../components/PostModal'
+import ApiClient from '../../utils/ApiClient'
 
 class HomeScreen extends React.Component {
   state = {
     modalVisible: false,
-    messages: []
+    posts: []
   }
 
   openModal () {
@@ -22,6 +25,11 @@ class HomeScreen extends React.Component {
     this.props.navigation.setParams({
       openModal: this.openModal.bind(this)
     })
+    ApiClient('get', '/posts', {}).then(response => {
+      this.setState({posts: response.data})
+    }).catch(error => {
+      console.warn(error)
+    })
   }
 
   render() {
@@ -29,8 +37,8 @@ class HomeScreen extends React.Component {
       <View>
         <ScrollView style={styles.home}>
           <FlatList
-            data={this.state.messages}
-            renderItem={({item}) => <ListItem label={item.content}/>}
+            data={this.state.posts}
+            renderItem={({item}) => <ListItem label={item.body}/>}
             keyExtractor={(item) => item.id.toString()}
           />
         </ScrollView>
