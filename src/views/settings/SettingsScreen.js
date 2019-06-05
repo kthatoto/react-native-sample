@@ -18,6 +18,7 @@ class SettingsScreen extends React.Component {
           <FlatList
             data={settingsList}
             keyExtractor={item => item.iconName}
+            scrollEnabled={false}
             renderItem={({item, index}) => {
               const _styles = [styles.settingItemLabel]
               if (settingsList.length - 1 > index) {
@@ -30,6 +31,7 @@ class SettingsScreen extends React.Component {
                   </View>
                   <View style={_styles}>
                     <Text>{item.label}</Text>
+                    <Ionicons name="ios-arrow-forward" size={20} color="gray"/>
                   </View>
                 </TouchableOpacity>
               )
@@ -77,10 +79,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10
   },
   settingItemLabel: {
-    justifyContent: 'center',
-    alignItems: 'flex-start',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     width: screenWidth - iconColumnWidth,
-    paddingLeft: 15
+    paddingHorizontal: 15
   },
   settingItemLabelNotLast: {
     borderColor: '#ccc',

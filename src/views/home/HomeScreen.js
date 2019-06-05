@@ -44,12 +44,13 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{flex: 1}}>
         <ScrollView style={styles.home}>
           <FlatList
             data={this.state.posts}
-            renderItem={({item}) => <PostItem label={item.body}/>}
             keyExtractor={(item) => item.id.toString()}
+            scrollEnabled={false}
+            renderItem={({item}) => <PostItem label={item.body}/>}
           />
         </ScrollView>
         <PostModal
