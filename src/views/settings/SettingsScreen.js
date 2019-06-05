@@ -2,51 +2,40 @@ import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { connect } from 'react-redux'
 import {
-  Text, TouchableHighlight, View, Alert, StyleSheet, Dimensions, TouchableOpacity, Button
+  Text, FlatList, View, Alert, StyleSheet, Dimensions, TouchableOpacity, Button
 } from 'react-native'
-import Modal from 'react-native-modal'
 
+const settingsList = [
+  { iconName: 'ios-person', label: 'プロフィール設定' },
+  { iconName: 'ios-analytics', label: '分析' },
+  { iconName: 'ios-alarm', label: 'アラーム' }
+]
 class SettingsScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerRight: (
-        <TouchableOpacity onPress={() => navigation.state.params.setModalVisible(true)}>
-          <Ionicons name="ios-add" color="white" size={35} style={{marginRight: 10}}/>
-        </TouchableOpacity>
-      )
-    }
-  }
-
-  state = {
-    modalVisible: false
-  }
-
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible})
-  }
-
-  componentWillMount () {
-    this.props.navigation.setParams({
-      setModalVisible: this.setModalVisible.bind(this)
-    })
-  }
-
   render () {
     return (
       <View style={styles.wrapper}>
-        <Modal isVisible={this.state.modalVisible}>
-          <View style={styles.modal}>
-            <Text>hey</Text>
-            <Button onPress={() => this.setModalVisible(false)} title="Close Modal"/>
-          </View>
-        </Modal>
-
-        <Button
-          onPress={() => {
-            this.setModalVisible(true);
-          }}
-          title="Show Modal"
-        />
+        <View style={styles.settingList}>
+          <FlatList
+            data={settingsList}
+            keyExtractor={item => item.iconName}
+            renderItem={({item, index}) => {
+              const _styles = [styles.settingItemLabel]
+              if (settingsList.length - 1 > index) {
+                _styles.push(styles.settingItemLabelNotLast)
+              }
+              return (
+                <TouchableOpacity style={styles.settingItem}>
+                  <View style={styles.settingItemIcon}>
+                    <Ionicons name={item.iconName} size={30} color="gray" style={{margin: 'auto'}}/>
+                  </View>
+                  <View style={_styles}>
+                    <Text>{item.label}</Text>
+                  </View>
+                </TouchableOpacity>
+              )
+            }}
+          />
+        </View>
       </View>
     )
   }
@@ -64,13 +53,37 @@ export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)
 
 const screenWidth = Math.round(Dimensions.get('window').width)
 const screenHeight = Math.round(Dimensions.get('window').height)
+const iconColumnWidth = 60
 const styles = StyleSheet.create({
   wrapper: {
-    marginTop: 30
+    flex: 1,
+    backgroundColor: '#efeff4'
   },
-  modal: {
+  settingList: {
     backgroundColor: 'white',
-    borderRadius: 5,
-    padding: 20
+    borderColor: '#ccc',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    marginTop: 40
+  },
+  settingItem: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  settingItemIcon: {
+    width: iconColumnWidth,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10
+  },
+  settingItemLabel: {
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    width: screenWidth - iconColumnWidth,
+    paddingLeft: 15
+  },
+  settingItemLabelNotLast: {
+    borderColor: '#ccc',
+    borderBottomWidth: 1
   }
 })

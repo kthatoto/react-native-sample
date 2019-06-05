@@ -11,9 +11,10 @@ import SettingsStack from './views/settings/SettingsStack'
 const AppContainer = createAppContainer(createBottomTabNavigator(
   {
     Home: { screen: HomeStack },
-    Settings: { screen: SettingsStack },
+    Settings: { screen: SettingsStack }
   },
   {
+    initialRouteName: 'Settings',
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state
