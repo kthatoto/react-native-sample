@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 
 const settingsList = [
-  { iconName: 'ios-person', label: 'プロフィール設定' },
+  { iconName: 'ios-person', label: 'プロフィール設定', route: 'Profile' },
   { iconName: 'ios-analytics', label: '分析' },
   { iconName: 'ios-alarm', label: 'アラーム' }
 ]
@@ -25,7 +25,8 @@ class SettingsScreen extends React.Component {
                 _styles.push(styles.settingItemLabelNotLast)
               }
               return (
-                <TouchableOpacity style={styles.settingItem}>
+                <TouchableOpacity style={styles.settingItem}
+                  onPress={() => this.props.navigation.push(item.route)}>
                   <View style={styles.settingItemIcon}>
                     <Ionicons name={item.iconName} size={30} color="gray" style={{margin: 'auto'}}/>
                   </View>
