@@ -4,7 +4,6 @@ import { Ionicons } from '@expo/vector-icons'
 import {
   Text, View, ScrollView, StyleSheet, FlatList, TouchableOpacity, TextInput
 } from 'react-native'
-import axios from 'axios'
 import { Formik } from 'formik'
 
 import PostItem from '../../components/PostItem'
@@ -23,16 +22,24 @@ class HomeScreen extends React.Component {
   closeModal () {
     this.setState({ modalVisible: false })
   }
+  closeModalWithRefetch () {
+    this.setState({ modalVisible: false })
+    this.getPosts()
+  }
 
-  componentWillMount () {
-    this.props.navigation.setParams({
-      openModal: this.openModal.bind(this)
-    })
+  getPosts () {
     ApiClient('get', '/posts', {}).then(response => {
       this.setState({posts: response.data})
     }).catch(error => {
       console.warn(error)
     })
+  }
+
+  componentWillMount () {
+    this.props.navigation.setParams({
+      openModal: this.openModal.bind(this)
+    })
+    this.getPosts()
   }
 
   render() {
@@ -45,7 +52,10 @@ class HomeScreen extends React.Component {
             keyExtractor={(item) => item.id.toString()}
           />
         </ScrollView>
-        <PostModal closeModal={this.closeModal.bind(this)} modalVisible={this.state.modalVisible}/>
+        <PostModal
+          closeModal={this.closeModal.bind(this)}
+          closeModalWithRefetch={this.closeModalWithRefetch.bind(this)}
+          modalVisible={this.state.modalVisible}/>
       </View>
     )
   }

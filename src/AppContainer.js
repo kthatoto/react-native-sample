@@ -2,9 +2,9 @@ import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import { connect } from 'react-redux'
-import SideMenu from 'react-native-side-menu';
-import Menu from './components/Menu'
+import SideMenu from 'react-native-side-menu'
 
+import Menu from './components/Menu'
 import HomeStack from './views/home/HomeStack'
 import SettingsStack from './views/settings/SettingsStack'
 

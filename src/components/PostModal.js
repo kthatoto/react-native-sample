@@ -1,22 +1,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Alert, Text, View, Button, Dimensions, StyleSheet, TextInput, InputAccessoryView } from 'react-native'
+import { Alert, Text, View, Button, Dimensions, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import Modal from 'react-native-modal'
+import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { Formik } from 'formik'
 
+import ApiClient from '../utils/ApiClient'
+
 class PostModal extends React.Component {
-  sendPost () {
-    console.log('posted1!1')
-    Alert.alert('送信！')
+  sendPost (values) {
+    ApiClient('post', '/posts', values).then(response => {
+      this.props.closeModalWithRefetch()
+    }).catch(_ => {
+      Alert.alert('送信できませんでした')
+    })
   }
 
   render () {
-    const inputAccessoryViewID = "postmodal-textarea"
     return (
       <Modal isVisible={this.props.modalVisible}
-        onBackdropPress={() => this.props.closeModal()}>
+        onBackdropPress={() => this.props.closeModal()}
+        style={styles.modalWrapper}>
         <View style={styles.modal}>
-          <Formik initialValues={{ body: '' }}>
+          <Formik initialValues={{ body: '' }} onSubmit={values => this.sendPost(values)}>
             {props => (
               <View>
                 <View styles={styles.textareaWrapper}>
@@ -24,18 +30,22 @@ class PostModal extends React.Component {
                     onChangeText={props.handleChange('body')}
                     onBlur={props.handleBlur('body')}
                     value={props.values.body}
-                    inputAccessoryViewID={inputAccessoryViewID}
                   />
                   <Text style={styles.textareaCount}>{props.values.body.length}/140</Text>
-                  <InputAccessoryView nativeID={inputAccessoryViewID}>
-                    <Button onPress={() => Alert.alert('完了！')} title="完了"/>
-                  </InputAccessoryView>
                 </View>
-                <Button title="送信" onPress={() => this.sendPost.bind(this)}/>
+                <View style={styles.buttons}>
+                  <TouchableOpacity onPress={this.props.closeModal} style={styles.cancelButton}>
+                    <Text style={[styles.buttonText, {color: 'gray'}]}>キャンセル</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={props.handleSubmit} style={styles.submitButton}>
+                    <Text style={[styles.buttonText, {color: 'white'}]}>送信</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             )}
           </Formik>
         </View>
+        <KeyboardSpacer style={styles.keyboardSpacer} topSpacing={-130}/>
       </Modal>
     )
   }
@@ -54,12 +64,40 @@ export default connect(mapStateToProps, mapDispatchToProps)(PostModal)
 const screenWidth = Math.round(Dimensions.get('window').width)
 const screenHeight = Math.round(Dimensions.get('window').height)
 const styles = StyleSheet.create({
+  buttons: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+    marginBottom: 40
+  },
+  cancelButton: {
+    height: 35,
+    width: 140,
+    backgroundColor: 'white',
+    borderColor: '#ddd',
+    borderWidth: 1,
+    borderRadius: 20
+  },
+  submitButton: {
+    height: 35,
+    width: 140,
+    backgroundColor: 'tomato',
+    borderColor: '#ddd',
+    borderWidth: 1,
+    borderRadius: 20
+  },
+  buttonText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop: 9
+  },
   modal: {
     backgroundColor: 'white',
     borderRadius: 10,
     paddingHorizontal: 20,
     paddingTop: 20,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   textarea: {
     height: 150,
@@ -75,9 +113,5 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 5,
     right: 5
-  },
-  accessory: {
-    height: 30,
-    backgroundColor: 'red'
   }
 })
