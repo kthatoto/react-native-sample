@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Constants } from 'expo'
 
 export default (method, url, data) => {
-  const baseURL = 'http://192.168.11.2:3000'
+  const baseURL = 'http://192.168.10.46:3000'
   if (method === 'get') {
     return axios({
       method,
