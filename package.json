@@ -13,7 +13,7 @@
     "formik": "^1.5.7",
     "prop-types": "^15.7.2",
     "react": "^16.5.0",
-    "react-native": "^0.57.1",
+    "react-native": "sdk-31.0.0",
     "react-native-keyboard-spacer": "^0.4.1",
     "react-native-modal": "^11.0.1",
     "react-native-side-menu": "^1.1.3",
